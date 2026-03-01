@@ -1,0 +1,23 @@
+[
+  {
+    "userId": "u_1",
+    "openid": "openid_xxx",
+    "nickName": "张三",
+    "avatarUrl": "",
+    "phoneNumber": "13800138000"
+  },
+  {
+    "userId": "u_1770387863198",
+    "openid": "opV5v3SkHW7n7nBe3xxyvXiECnus",
+    "nickName": "新用户",
+    "avatarUrl": "",
+    "phoneNumber": ""
+  },
+  {
+    "userId": "u_1770518838245",
+    "openid": "opV5v3UgKXc3Jg1GG1IIizsZq6_s",
+    "nickName": "新用户",
+    "avatarUrl": "",
+    "phoneNumber": ""
+  }
+]
