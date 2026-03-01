@@ -15,7 +15,28 @@ const readOrders = () => {
         return [];
     }
 };
+// 待收货状态值（与你前端 OrderStatus.PENDING_RECEIPT 对齐）
+const STATUS_PENDING_RECEIPT = 40;
 
+// 规范化物流信息：只在待收货时强制返回 companyName + trackingNo
+function pickLogistics(order) {
+  const isPendingReceipt = Number(order?.orderStatus) === STATUS_PENDING_RECEIPT;
+
+  // 其他状态：logistics 可不返回/可 null（推荐 null，干净）
+  if (!isPendingReceipt) return null;
+
+  const lg = order?.logistics || {};
+  const companyName = String(lg.companyName || '').trim();
+  const trackingNo = String(lg.trackingNo || '').trim();
+
+  // 强制规则：待收货必须有物流信息
+  if (!companyName || !trackingNo) {
+    // 这里我建议直接抛错，让接口返回 Error，逼自己把 orders.json 数据补齐
+    throw new Error('订单处于待收货状态但缺少物流信息');
+  }
+
+  return { companyName, trackingNo };
+}
 /**
  * 1）创建订单接口
  * POST /api/order/commit
@@ -119,17 +140,24 @@ router.get('/list', (req, res) => {
         }
 
         const start = (parseInt(pageNum) - 1) * parseInt(pageSize);
-        const list = userOrders.slice(start, start + parseInt(pageSize));
+        const pageList = userOrders.slice(start, start + parseInt(pageSize));
+
+        // 在列表输出时补 logistics 字段（不改原对象也行，这里用浅拷贝）
+        const orders = pageList.map((o) => {
+        const logistics = pickLogistics(o); // 可能是 null，可能抛错
+        return { ...o, logistics };
+        });
 
         res.json({
-            code: "Success",
-            success: true,
-            data: {
-                pageNum: Number(pageNum),
-                pageSize: Number(pageSize),
-                totalCount: userOrders.length,
-                orders: list
-            }
+        code: "Success",
+        success: true,
+        msg: "",
+        data: {
+            pageNum: Number(pageNum),
+            pageSize: Number(pageSize),
+            totalCount: userOrders.length,
+            orders,
+        },
         });
     } catch (err) {
         res.json({ code: "Error", success: false, msg: "获取失败", data: null });

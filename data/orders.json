@@ -33,8 +33,12 @@
     "orderId": "o_1770822130431",
     "orderNo": "CH1770822130431799",
     "parentOrderNo": "CH1770822130431799",
-    "orderStatus": 5,
-    "orderStatusName": "待付款",
+    "orderStatus": 40,
+    "orderStatusName": "待收货",
+    "logistics": {
+      "companyName": "顺丰",
+      "trackingNo": "SF1234567890123"
+    },
     "createTime": "1770822130431",
     "totalAmount": "1",
     "paymentAmount": "1",
