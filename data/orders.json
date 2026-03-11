@@ -536,5 +536,34 @@
     "paymentVO": {
       "paySuccessTime": null
     }
+  },
+  {
+    "uid": "u_1770518838245",
+    "orderId": "o_1772387712028",
+    "orderNo": "CH1772387712027457",
+    "parentOrderNo": "CH1772387712027457",
+    "orderStatus": 5,
+    "orderStatusName": "待付款",
+    "createTime": "1772387712028",
+    "totalAmount": "undefined",
+    "paymentAmount": "undefined",
+    "items": [
+      {
+        "spuId": "0",
+        "skuId": "1kg|1袋",
+        "storeId": "1000",
+        "buyQuantity": 1,
+        "priceAtOrder": "undefined"
+      }
+    ],
+    "logisticsVO": {
+      "receiverName": "x",
+      "receiverPhone": "15600000000",
+      "receiverAddress": "123",
+      "receiverCity": ""
+    },
+    "paymentVO": {
+      "paySuccessTime": null
+    }
   }
 ]

@@ -14,7 +14,7 @@ const app = express();
 
 // 1. 全局基础中间件
 app.use(express.json());
-
+app.use('/static', express.static(path.join(__dirname, 'public')));
 // 2. 日志监控中间件
 app.use((req, res, next) => {
     const now = new Date().toLocaleString();
